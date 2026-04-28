@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Queen Coiffure</title>
+    <script src='https://cdn.tailwindcss.com'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(236, 72, 153, 0.1);
+        }
+        .accent-yellow {
+            color: #fbbf24;
+        }
+        .bg-accent-yellow {
+            background-color: #fef3c7;
+        }
+        .status-badge {
+            transition: all 0.2s ease;
+        }
+        .filter-btn {
+            transition: all 0.2s ease;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body class='bg-gray-50 min-h-screen'>
+    <!-- Header -->
+    <header class='bg-white shadow-lg sticky top-0 z-50'>
+        <div class='max-w-md mx-auto px-6 py-4 flex items-center justify-between'>
+            <div class='flex items-center space-x-3'>
+                <a href='index.html' class='text-gray-600 hover:text-gray-800'>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+                <h1 class='font-bold text-xl text-gray-800'>Transaction History</h1>
+            </div>
+            <div class='w-10 h-10 gradient-bg rounded-full flex items-center justify-center'>
+                <span class='text-white'>💅</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class='max-w-md mx-auto px-6 py-8'>
+        <!-- Summary Stats -->
+        <div class='bg-white rounded-2xl shadow-sm p-6 mb-6'>
+            <div class='grid grid-cols-3 gap-4 text-center'>
+                <div>
+                    <p class='text-2xl font-bold text-gray-800'>$2,450</p>
+                    <p class='text-xs text-gray-500'>Total Revenue</p>
+                </div>
+                <div>
+                    <p class='text-2xl font-bold text-green-600'>24</p>
+                    <p class='text-xs text-gray-500'>Completed</p>
+                </div>
+                <div>
+                    <p class='text-2xl font-bold text-orange-600'>3</p>
+                    <p class='text-xs text-gray-500'>Pending</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class='flex space-x-2 mb-6 overflow-x-auto'>
+            <button class='filter-btn active px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap'>All</button>
+            <button class='filter-btn bg-white px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap'>Completed</button>
+            <button class='filter-btn bg-white px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap'>Pending</button>
+            <button class='filter-btn bg-white px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap'>Today</button>
+        </div>
+
+        <!-- Transaction List -->
+        <div class='space-y-4'>
+            <!-- Today -->
+            <div>
+                <h3 class='text-sm font-semibold text-gray-500 mb-3'>TODAY</h3>
+                
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>💇</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Hair Styling</p>
+                                <p class='text-xs text-gray-500'>Client: Sarah M. • 2:30 PM</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$15</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium'>Paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>💄</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Makeup</p>
+                                <p class='text-xs text-gray-500'>Client: Emma L. • 11:15 AM</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$20</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium'>Paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>💅</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Nail Art</p>
+                                <p class='text-xs text-gray-500'>Client: Lisa K. • 9:45 AM</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$12</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium'>Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yesterday -->
+            <div>
+                <h3 class='text-sm font-semibold text-gray-500 mb-3'>YESTERDAY</h3>
+                
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>👱‍♀️</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Braids</p>
+                                <p class='text-xs text-gray-500'>Client: Maria S. • 4:20 PM</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$15</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium'>Paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>💇</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Hair Styling</p>
+                                <p class='text-xs text-gray-500'>Client: Anna D. • 2:00 PM</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$10</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium'>Paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>💄</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Makeup + Nails</p>
+                                <p class='text-xs text-gray-500'>Client: Rachel T. • 10:30 AM</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$32</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium'>Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- This Week -->
+            <div>
+                <h3 class='text-sm font-semibold text-gray-500 mb-3'>THIS WEEK</h3>
+                
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>💅</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Full Package</p>
+                                <p class='text-xs text-gray-500'>Client: Jessica W. • Monday</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$57</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium'>Paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>👱‍♀️</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Braids + Styling</p>
+                                <p class='text-xs text-gray-500'>Client: Nicole B. • Monday</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$25</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium'>Paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='bg-white rounded-2xl shadow-sm p-4 card-hover mb-3'>
+                    <div class='flex items-center justify-between'>
+                        <div class='flex items-center space-x-3'>
+                            <div class='w-10 h-10 bg-accent-yellow rounded-full flex items-center justify-center'>
+                                <span class='text-lg'>💇</span>
+                            </div>
+                            <div>
+                                <p class='font-medium text-gray-800'>Hair Styling</p>
+                                <p class='text-xs text-gray-500'>Client: Amanda R. • Sunday</p>
+                            </div>
+                        </div>
+                        <div class='text-right'>
+                            <p class='text-lg font-bold accent-yellow'>$10</p>
+                            <span class='status-badge inline-block px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-medium'>Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class='mt-8 text-center'>
+            <button class='text-pink-600 font-medium text-sm hover:text-pink-700 transition-colors'>
+                Load More Transactions
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
