@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - Queen Coiffure</title>
+    <title>Paiement - Queen Coiffure</title>
     <script src='https://cdn.tailwindcss.com'></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +67,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </a>
-                <h1 class='font-bold text-xl text-gray-800'>Payment</h1>
+                <h1 class='font-bold text-xl text-gray-800'>Paiement</h1>
             </div>
             <div class='w-10 h-10 gradient-bg rounded-full flex items-center justify-center'>
                 <span class='text-white'>💅</span>
@@ -104,30 +104,30 @@
 
         <!-- Order Summary -->
         <div class='bg-white rounded-2xl shadow-sm p-6 mb-6'>
-            <h2 class='text-lg font-semibold text-gray-800 mb-4'>Order Summary</h2>
+            <h2 class='text-lg font-semibold text-gray-800 mb-4'>Résumé de la commande</h2>
             <div class='space-y-3 mb-4'>
                 <div class='flex items-center justify-between'>
                     <div class='flex items-center space-x-2'>
                         <span class='text-lg'>💇</span>
-                        <span class='text-gray-700'>Hair Styling</span>
+                        <span class='text-gray-700'>Coiffure</span>
                     </div>
                     <span class='font-medium text-gray-800'>$10</span>
                 </div>
                 <div class='flex items-center justify-between'>
                     <div class='flex items-center space-x-2'>
                         <span class='text-lg'>💄</span>
-                        <span class='text-gray-700'>Makeup</span>
+                        <span class='text-gray-700'>Maquillage</span>
                     </div>
                     <span class='font-medium text-gray-800'>$20</span>
                 </div>
             </div>
             <div class='border-t pt-4'>
                 <div class='flex items-center justify-between mb-2'>
-                    <span class='text-gray-600'>Subtotal</span>
+                    <span class='text-gray-600'>Sous-total</span>
                     <span class='font-medium text-gray-800'>$30</span>
                 </div>
                 <div class='flex items-center justify-between mb-2'>
-                    <span class='text-gray-600'>Service Fee</span>
+                    <span class='text-gray-600'>Frais de service</span>
                     <span class='font-medium text-gray-800'>$2</span>
                 </div>
                 <div class='flex items-center justify-between pt-2 border-t'>
@@ -139,7 +139,7 @@
 
         <!-- Payment Methods -->
         <div class='bg-white rounded-2xl shadow-sm p-6 mb-6'>
-            <h2 class='text-lg font-semibold text-gray-800 mb-4'>Select Payment Method</h2>
+            <h2 class='text-lg font-semibold text-gray-800 mb-4'>Sélectionner le mode de paiement</h2>
             <div class='space-y-3'>
                 <div class='payment-method bg-gray-50 p-4 rounded-xl flex items-center justify-between' data-method='m-pesa'>
                     <div class='flex items-center space-x-3'>
@@ -148,7 +148,7 @@
                         </div>
                         <div>
                             <p class='font-medium text-gray-800'>M-Pesa</p>
-                            <p class='text-xs text-gray-500'>Pay with M-Pesa</p>
+                            <p class='text-xs text-gray-500'>Payer avec M-Pesa</p>
                         </div>
                     </div>
                     <div class='w-6 h-6 border-2 border-gray-300 rounded-lg flex items-center justify-center'>
@@ -165,7 +165,7 @@
                         </div>
                         <div>
                             <p class='font-medium text-gray-800'>Airtel Money</p>
-                            <p class='text-xs text-gray-500'>Pay with Airtel Money</p>
+                            <p class='text-xs text-gray-500'>Payer avec Airtel Money</p>
                         </div>
                     </div>
                     <div class='w-6 h-6 border-2 border-gray-300 rounded-lg flex items-center justify-center'>
@@ -182,7 +182,7 @@
                         </div>
                         <div>
                             <p class='font-medium text-gray-800'>Orange Money</p>
-                            <p class='text-xs text-gray-500'>Pay with Orange Money</p>
+                            <p class='text-xs text-gray-500'>Payer avec Orange Money</p>
                         </div>
                     </div>
                     <div class='w-6 h-6 border-2 border-gray-300 rounded-lg flex items-center justify-center'>
@@ -198,8 +198,8 @@
                             <span class='text-white font-bold text-sm'>$</span>
                         </div>
                         <div>
-                            <p class='font-medium text-gray-800'>Cash</p>
-                            <p class='text-xs text-gray-500'>Pay with cash</p>
+                            <p class='font-medium text-gray-800'>Espèces</p>
+                            <p class='text-xs text-gray-500'>Payer en espèces</p>
                         </div>
                     </div>
                     <div class='w-6 h-6 border-2 border-gray-300 rounded-lg flex items-center justify-center'>
@@ -214,7 +214,7 @@
         <!-- Pay Button -->
         <button id='pay-btn' class='w-full btn-primary text-white py-4 rounded-2xl text-lg font-medium opacity-50 cursor-not-allowed transition-all duration-300'>
             <span class='flex items-center justify-center space-x-2'>
-                <span>Select Payment Method</span>
+                <span>Sélectionner le mode de paiement</span>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                 </svg>
@@ -227,7 +227,7 @@
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
                 </svg>
-                <span>Secure payment powered by Queen Coiffure</span>
+                <span>Paiement sécurisé par Queen Coiffure</span>
             </div>
         </div>
     </main>
@@ -272,7 +272,7 @@
                 payBtn.classList.add('opacity-50', 'cursor-not-allowed');
                 payBtn.innerHTML = `
                     <span class='flex items-center justify-center space-x-2'>
-                        <span>Select Payment Method</span>
+                        <span>Sélectionner le mode de paiement</span>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
