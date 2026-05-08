@@ -1,0 +1,22 @@
+{
+  "name": "coiffure-salon-services",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "node ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./css/input.css -o ./css/output.css --minify",
+    "build": "npm run build:css",
+    "dev": "node ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./css/input.css -o ./css/output.css --watch",
+    "serve": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "qrcode": "^1.5.4",
+    "tailwindcss": "^4.2.4"
+  }
+}
