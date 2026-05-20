@@ -284,8 +284,10 @@
 
         // QR PAYMENT URL
         const paymentURL =
-    window.location.origin +
-    '/payment.html';
+            new URL(
+                'payment.html',
+                window.location.href
+            ).href;
 
         // GENERATE QR
         new QRCode(
