@@ -282,12 +282,20 @@
             window.location.href = 'services.html';
         }
 
-        // QR PAYMENT URL
-        const paymentURL =
-            new URL(
-                'payment.html',
-                window.location.href
-            ).href;
+       // ENCODE INVOICE DATA
+const encodedData =
+    encodeURIComponent(
+        btoa(
+            JSON.stringify(invoiceData)
+        )
+    );
+
+// PAYMENT URL
+const paymentURL =
+    new URL(
+        `payment.html?data=${encodedData}`,
+        window.location.href
+    ).href;
 
         // GENERATE QR
         new QRCode(

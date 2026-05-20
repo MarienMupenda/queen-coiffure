@@ -260,10 +260,33 @@
 
 <script>
 
-    // LOAD INVOICE DATA
-    const invoiceData = JSON.parse(
-        localStorage.getItem('queen_invoice')
+// GET URL PARAMS
+const params =
+    new URLSearchParams(
+        window.location.search
     );
+
+// GET ENCODED DATA
+const encodedData =
+    params.get('data');
+
+// CHECK DATA
+if (!encodedData) {
+
+    alert('No payment data found');
+
+    window.location.href = 'index.html';
+}
+
+// DECODE DATA
+const invoiceData =
+    JSON.parse(
+        atob(
+            decodeURIComponent(encodedData)
+        )
+    );
+
+console.log(invoiceData);
 
     // CHECK DATA
     if (!invoiceData) {
