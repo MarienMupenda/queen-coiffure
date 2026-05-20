@@ -214,43 +214,84 @@
         </a>
     </main>
 
-    <script>
-        let selectedServices = [];
-        let totalAmount = 0;
+<script>
+    let selectedServices = [];
+    let totalAmount = 0;
 
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const service = this.dataset.service;
-                const price = parseInt(this.dataset.price);
-                const checkbox = this.querySelector('.checkbox-custom svg');
-                
-                if (this.classList.contains('selected')) {
-                    this.classList.remove('selected');
-                    checkbox.classList.add('hidden');
-                    selectedServices = selectedServices.filter(s => s !== service);
-                    totalAmount -= price;
-                } else {
-                    this.classList.add('selected');
-                    checkbox.classList.remove('hidden');
-                    selectedServices.push(service);
-                    totalAmount += price;
-                }
-                
-                updateSummary();
-            });
-        });
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', function() {
 
-        function updateSummary() {
-            document.getElementById('total-amount').textContent = `$${totalAmount}`;
-            document.getElementById('service-count').textContent = selectedServices.length;
-            
-            const continueBtn = document.getElementById('continue-btn');
-            if (selectedServices.length > 0) {
-                continueBtn.classList.remove('opacity-50', 'pointer-events-none');
+            const serviceName = this.querySelector('h3').textContent;
+            const price = parseInt(this.dataset.price);
+
+            const checkbox = this.querySelector('.checkbox-custom svg');
+
+            if (this.classList.contains('selected')) {
+
+                this.classList.remove('selected');
+                checkbox.classList.add('hidden');
+
+                selectedServices = selectedServices.filter(
+                    service => service.name !== serviceName
+                );
+
+                totalAmount -= price;
+
             } else {
-                continueBtn.classList.add('opacity-50', 'pointer-events-none');
+
+                this.classList.add('selected');
+                checkbox.classList.remove('hidden');
+
+                selectedServices.push({
+                    name: serviceName,
+                    price: price
+                });
+
+                totalAmount += price;
             }
+
+            updateSummary();
+        });
+    });
+
+    function updateSummary() {
+
+        document.getElementById('total-amount').textContent = `$${totalAmount}`;
+        document.getElementById('service-count').textContent = selectedServices.length;
+
+        const continueBtn = document.getElementById('continue-btn');
+
+        if (selectedServices.length > 0) {
+
+            continueBtn.classList.remove('opacity-50', 'pointer-events-none');
+
+        } else {
+
+            continueBtn.classList.add('opacity-50', 'pointer-events-none');
         }
-    </script>
+    }
+
+    // SAVE DATA BEFORE REDIRECT
+    document.getElementById('continue-btn').addEventListener('click', function() {
+
+        const invoiceData = {
+
+            invoice_id: 'QC-' + Date.now(),
+
+            services: selectedServices,
+
+            total: totalAmount,
+
+            status: 'pending',
+
+            created_at: new Date().toISOString()
+        };
+
+        localStorage.setItem(
+            'queen_invoice',
+            JSON.stringify(invoiceData)
+        );
+    });
+</script>
 </body>
 </html>

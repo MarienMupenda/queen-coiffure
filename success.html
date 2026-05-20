@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Paiement Réussi - Queen Coiffure</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .gradient-bg {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ec4899 0%,
+                    #db2777 100%
+                );
+        }
+
+        .success-animation {
+            animation: pop 0.5s ease;
+        }
+
+        @keyframes pop {
+
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
+
+    <div class="bg-white rounded-3xl shadow-xl p-8 max-w-md w-full text-center">
+
+        <!-- Success Icon -->
+        <div class="success-animation w-24 h-24 mx-auto gradient-bg rounded-full flex items-center justify-center mb-6">
+
+            <svg class="w-12 h-12 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+
+                <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="M5 13l4 4L19 7">
+                </path>
+
+            </svg>
+
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-3">
+            Paiement réussi
+        </h1>
+
+        <p class="text-gray-500 mb-8">
+            Merci d’avoir choisi Queen Coiffure ✨
+        </p>
+
+        <!-- Payment Summary -->
+        <div class="bg-pink-50 rounded-2xl p-5 mb-6">
+
+            <p class="text-sm text-gray-500 mb-2">
+                Montant payé
+            </p>
+
+            <p id="success-total"
+                class="text-4xl font-bold text-pink-600">
+                $0
+            </p>
+
+        </div>
+
+        <!-- Payment Method -->
+        <div class="flex items-center justify-center space-x-2 mb-8">
+
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+
+                <svg class="w-5 h-5 text-green-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.172 7.707 8.879a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd">
+                    </path>
+
+                </svg>
+
+            </div>
+
+            <span id="payment-method"
+                class="text-gray-700 font-medium">
+            </span>
+
+        </div>
+
+        <!-- Button -->
+        <a href="index.html">
+
+            <button class="w-full gradient-bg text-white py-4 rounded-2xl font-medium text-lg hover:opacity-90 transition">
+
+                Retour à l'accueil
+
+            </button>
+
+        </a>
+
+    </div>
+
+    <script>
+
+        // LOAD PAYMENT DATA
+        const invoiceData = JSON.parse(
+            localStorage.getItem('queen_invoice')
+        );
+
+        // REDIRECT IF NO DATA
+        if (!invoiceData) {
+
+            window.location.href = 'index.html';
+        }
+
+        // DISPLAY TOTAL
+        document.getElementById('success-total')
+            .textContent = `$${invoiceData.total}`;
+
+        // DISPLAY METHOD
+        document.getElementById('payment-method')
+            .textContent =
+                invoiceData.payment_method
+                    .replace('-', ' ')
+                    .replace(/\b\w/g, l => l.toUpperCase());
+
+    </script>
+
+</body>
+
+</html>

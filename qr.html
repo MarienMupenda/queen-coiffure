@@ -1,72 +1,122 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paiement QR - Queen Coiffure</title>
     <script src='https://cdn.tailwindcss.com'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
         .gradient-bg {
             background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
         }
+
         .card-hover {
             transition: all 0.3s ease;
         }
+
         .card-hover:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 16px rgba(236, 72, 153, 0.1);
         }
+
         .btn-primary {
             background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
             transition: all 0.3s ease;
         }
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 16px rgba(236, 72, 153, 0.3);
         }
+
         .accent-yellow {
             color: #fbbf24;
         }
+
         .bg-accent-yellow {
             background-color: #fef3c7;
         }
+
         .qr-container {
             background: linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6),
-                        linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6);
+                linear-gradient(45deg, #f3f4f6 25%, transparent 25%, transparent 75%, #f3f4f6 75%, #f3f4f6);
             background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
         }
+
         .pulse-animation {
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
+
         .rotate-animation {
             animation: rotate 3s linear infinite;
         }
+
         @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
+
         .loading-dots::after {
             content: '';
             animation: dots 1.5s steps(4, end) infinite;
         }
+
         @keyframes dots {
-            0%, 20% { content: ''; }
-            40% { content: '.'; }
-            60% { content: '..'; }
-            80%, 100% { content: '...'; }
+
+            0%,
+            20% {
+                content: '';
+            }
+
+            40% {
+                content: '.';
+            }
+
+            60% {
+                content: '..';
+            }
+
+            80%,
+            100% {
+                content: '...';
+            }
         }
     </style>
 </head>
+
 <body class='bg-gray-50 min-h-screen'>
     <!-- Header -->
     <header class='bg-white shadow-lg sticky top-0 z-50'>
@@ -74,7 +124,8 @@
             <div class='flex items-center space-x-3'>
                 <a href='payment.html' class='text-gray-600 hover:text-gray-800'>
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
                     </svg>
                 </a>
                 <h1 class='font-bold text-xl text-gray-800'>Paiement QR</h1>
@@ -96,47 +147,50 @@
             </div>
             <h2 class='text-xl font-bold text-gray-800 mb-2'>Queen Coiffure</h2>
             <p class='text-gray-600 text-sm mb-4'>Scannez le code QR pour finaliser le paiement</p>
-            
+
             <!-- Amount Display -->
             <div class='bg-accent-yellow rounded-2xl p-4 mb-6'>
                 <p class='text-sm text-gray-600 mb-1'>Montant total</p>
-                <p class='text-4xl font-bold accent-yellow'>$32</p>
+                <p id='qr-total' class='text-4xl font-bold accent-yellow'>$0</p>
+            </div>
+            <div class='mb-6'>
+                <h3 class='text-sm font-semibold text-gray-700 mb-2'>
+                    Services sélectionnés
+                </h3>
+
+                <div id='selected-services' class='space-y-2'>
+                </div>
             </div>
 
             <!-- QR Code -->
             <div class='relative mb-8'>
-                <div class='qr-container w-80 h-80 mx-auto rounded-2xl flex items-center justify-center relative overflow-hidden'>
+                <div
+                    class='qr-container w-80 h-80 mx-auto rounded-2xl flex items-center justify-center relative overflow-hidden'>
                     <!-- QR Code Placeholder -->
                     <div class='absolute inset-6 bg-white rounded-xl flex items-center justify-center'>
                         <div class='text-center'>
-                            <div class='w-40 h-40 bg-gray-900 rounded-lg flex items-center justify-center mb-3'>
-                                <div class='grid grid-cols-3 gap-1'>
-                                    <div class='w-2 h-2 bg-white'></div>
-                                    <div class='w-2 h-2 bg-gray-900'></div>
-                                    <div class='w-2 h-2 bg-white'></div>
-                                    <div class='w-2 h-2 bg-gray-900'></div>
-                                    <div class='w-2 h-2 bg-white'></div>
-                                    <div class='w-2 h-2 bg-gray-900'></div>
-                                    <div class='w-2 h-2 bg-white'></div>
-                                    <div class='w-2 h-2 bg-gray-900'></div>
-                                    <div class='w-2 h-2 bg-white'></div>
-                                </div>
-                            </div>
+                            <div id="qrcode" class="mb-3"></div>
                             <p class='text-xs text-gray-500'>Queen Coiffure</p>
-                            <p class='text-xs text-gray-500'>ID Paiement: #QC2024</p>
+                            <p id='invoice-id' class='text-xs text-gray-500'></p>
                         </div>
                     </div>
-                    
+
                     <!-- Corner Decorations -->
-                    <div class='absolute top-2 left-2 w-8 h-8 border-t-4 border-l-4 border-pink-500 rounded-tl-lg'></div>
-                    <div class='absolute top-2 right-2 w-8 h-8 border-t-4 border-r-4 border-pink-500 rounded-tr-lg'></div>
-                    <div class='absolute bottom-2 left-2 w-8 h-8 border-b-4 border-l-4 border-pink-500 rounded-bl-lg'></div>
-                    <div class='absolute bottom-2 right-2 w-8 h-8 border-b-4 border-r-4 border-pink-500 rounded-br-lg'></div>
+                    <div class='absolute top-2 left-2 w-8 h-8 border-t-4 border-l-4 border-pink-500 rounded-tl-lg'>
+                    </div>
+                    <div class='absolute top-2 right-2 w-8 h-8 border-t-4 border-r-4 border-pink-500 rounded-tr-lg'>
+                    </div>
+                    <div class='absolute bottom-2 left-2 w-8 h-8 border-b-4 border-l-4 border-pink-500 rounded-bl-lg'>
+                    </div>
+                    <div class='absolute bottom-2 right-2 w-8 h-8 border-b-4 border-r-4 border-pink-500 rounded-br-lg'>
+                    </div>
                 </div>
-                
+
                 <!-- Scanning Animation -->
                 <div class='absolute inset-0 flex items-center justify-center pointer-events-none'>
-                    <div class='w-1 h-full bg-gradient-to-b from-transparent via-pink-500 to-transparent rotate-animation opacity-50'></div>
+                    <div
+                        class='w-1 h-full bg-gradient-to-b from-transparent via-pink-500 to-transparent rotate-animation opacity-50'>
+                    </div>
                 </div>
             </div>
 
@@ -156,8 +210,9 @@
                         Retour aux modes de paiement
                     </button>
                 </a>
-                
-                <button class='w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors'>
+
+                <button
+                    class='w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors'>
                     Actualiser le code QR
                 </button>
             </div>
@@ -176,7 +231,7 @@
                         <p class='text-xs text-gray-500'>M-Pesa, Airtel Money ou Orange Money</p>
                     </div>
                 </div>
-                
+
                 <div class='flex items-start space-x-3'>
                     <div class='w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
                         <span class='text-pink-600 text-xs font-bold'>2</span>
@@ -186,7 +241,7 @@
                         <p class='text-xs text-gray-500'>Utilisez le scanner QR de votre application</p>
                     </div>
                 </div>
-                
+
                 <div class='flex items-start space-x-3'>
                     <div class='w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
                         <span class='text-pink-600 text-xs font-bold'>3</span>
@@ -215,63 +270,111 @@
     </main>
 
     <script>
-        // Simulate payment processing
+
+        // LOAD INVOICE DATA
+        const invoiceData = JSON.parse(
+            localStorage.getItem('queen_invoice')
+        );
+
+        // REDIRECT IF NO DATA
+        if (!invoiceData) {
+
+            window.location.href = 'services.html';
+        }
+
+        // QR PAYMENT URL
+        const paymentURL =
+    window.location.origin +
+    '/payment.html';
+
+        // GENERATE QR
+        new QRCode(
+            document.getElementById("qrcode"),
+            {
+                text: paymentURL,
+                width: 220,
+                height: 220,
+                colorDark: "#111827",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            }
+        );
+
+        // DISPLAY TOTAL
+        document.getElementById('qr-total').textContent =
+            `$${invoiceData.total}`;
+
+        // DISPLAY INVOICE ID
+        document.getElementById('invoice-id').textContent =
+            `ID Paiement: ${invoiceData.invoice_id}`;
+
+        // DISPLAY SERVICES
+        const servicesContainer =
+            document.getElementById('selected-services');
+
+        invoiceData.services.forEach(service => {
+
+            servicesContainer.innerHTML += `
+
+            <div class='flex items-center justify-between bg-gray-50 rounded-xl px-4 py-2'>
+
+                <span class='text-sm text-gray-700'>
+                    ${service.name}
+                </span>
+
+                <span class='text-sm font-semibold accent-yellow'>
+                    $${service.price}
+                </span>
+
+            </div>
+        `;
+        });
+
+        // QR TIMER
         let paymentTimeout;
-        let timeRemaining = 600; // 10 minutes in seconds
+
+        let timeRemaining = 600;
 
         function updateTimer() {
+
             const minutes = Math.floor(timeRemaining / 60);
+
             const seconds = timeRemaining % 60;
-            const timerElement = document.querySelector('.text-xs.text-gray-500');
+
+            const timerElement =
+                document.querySelector('.text-xs.text-gray-500');
+
             if (timerElement) {
-                timerElement.textContent = `Ce code QR expire dans ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                timerElement.textContent =
+                    `Ce code QR expire dans ${minutes}:${seconds.toString().padStart(2, '0')}`;
             }
-            
+
             if (timeRemaining > 0) {
+
                 timeRemaining--;
-                paymentTimeout = setTimeout(updateTimer, 1000);
+
+                paymentTimeout =
+                    setTimeout(updateTimer, 1000);
+
             } else {
-                // QR code expired
+
                 document.querySelector('.text-orange-500').innerHTML = `
-                    <div class='flex items-center justify-center space-x-2 text-red-500'>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
-                        </svg>
-                        <p class='text-sm font-medium'>Code QR expiré</p>
-                    </div>
-                `;
-                document.querySelector('.text-xs.text-gray-500').textContent = 'Veuillez actualiser pour générer un nouveau code QR';
+
+                <div class='flex items-center justify-center space-x-2 text-red-500'>
+
+                    <p class='text-sm font-medium'>
+                        Code QR expiré
+                    </p>
+
+                </div>
+            `;
             }
         }
 
-        // Start timer
         updateTimer();
 
-        // Simulate successful payment after 5 seconds for demo
-        setTimeout(() => {
-            if (timeRemaining > 0) {
-                clearTimeout(paymentTimeout);
-                document.querySelector('.text-orange-500').innerHTML = `
-                    <div class='flex items-center justify-center space-x-2 text-green-500'>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                        <p class='text-sm font-medium'>Paiement réussi!</p>
-                    </div>
-                `;
-                document.querySelector('.text-xs.text-gray-500').textContent = 'Redirection vers le reçu...';
-                
-                // Redirect to history after 2 seconds
-                setTimeout(() => {
-                    window.location.href = 'history.html';
-                }, 2000);
-            }
-        }, 5000);
-
-        // Clean up timeout when page unloads
-        window.addEventListener('beforeunload', () => {
-            clearTimeout(paymentTimeout);
-        });
     </script>
 </body>
+
 </html>
